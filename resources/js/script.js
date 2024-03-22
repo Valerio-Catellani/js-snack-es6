@@ -79,6 +79,7 @@ let cancelButton2 = document.getElementById("cancel-button-2");
 let arrayStudent = document.getElementById("array-student")
 let arrayStudentName = document.getElementById("array-student-name")
 let arrayStudentGrades = document.getElementById("array-student-grades")
+let arrayStudentGradesANDId = document.getElementById("array-student-grades-and-id")
 //variables
 
 let students = [
@@ -122,20 +123,34 @@ let students = [
 let formattedStudent = '<pre>' + JSON.stringify(students, null, 2) + '</pre>';
 arrayStudent.innerHTML = formattedStudent;
 
-let studentName = students.map(element => {
-    return element = `<li>${element.Name.toUpperCase()}</li>`
-})
-arrayStudentName.innerHTML = `<ul>
+
+generateList.addEventListener('click', () => generateStudents())
+
+function generateStudents() {
+    let studentName = students.map(element => {
+        return element = `<li>${element.Name.toUpperCase()}</li>`
+    })
+    arrayStudentName.innerHTML = `<ul>
 ${studentName.join('')}
 </ul>`
 
+    let studentWith70 = students.filter(element => {
+        return element.Grades > 70;
+    }).map(element => element = `<li>${element.Name.toUpperCase()}</li>`)
 
-let studentWith70 = students.filter(element => {
-    return element.Grades > 70;
-}).map(element => element = `<li>${element.Name.toUpperCase()}</li>`)
-
-arrayStudentGrades.innerHTML = `<ul>
+    arrayStudentGrades.innerHTML = `<ul>
 ${studentWith70.join('')}
 </ul>`
 
-let studentWith70andId120 = students.map()
+    let studentsWith70andId120 = students.filter(element => {
+        return element.Grades > 70 && element.Id > 120;
+    }).map(element => element = `<li>${element.Name.toUpperCase()}</li>`)
+
+    arrayStudentGradesANDId.innerHTML = `<ul>
+${studentsWith70andId120.join('')}
+</ul>`
+}
+
+cancelButton2.addEventListener('click', () => {
+    arrayStudentName.innerHTML = arrayStudentGrades.innerHTML = arrayStudentGradesANDId.innerHTML = ""
+})
