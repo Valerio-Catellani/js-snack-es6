@@ -13,52 +13,80 @@
   <link rel="stylesheet" href="resources/css/style.css">
   <link rel="stylesheet" href="resources/css/animation.css">
   <link rel="stylesheet" href="resources/css/media-query.css">
-  <title>Array-bonus</title>
+  <title>Jsnack es 6</title>
 </head>
 
 <body class="bg-dark ">
-  <div class="container my-5 d-flex flex-column p-4 bg-light border border-5 border-warning-subtle  rounded-3  ">
-    <h2 class="text-center mb-3 ">Snack 1 - Festa Dwayne Johnson</h2>
-    <h3>Lista Invitati</h3>
-    <div class="first-array bg-warning bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto ">
-      <h4 class=" mb-4 small"></h4>
+  <div id="app">
+  </div>
+
+
+  <div class="container my-5 d-flex flex-column p-4 bg-light border border-5 border-warning-subtle rounded-3">
+    <h2 class="text-center mb-3 display-4 fw-bold text-secondary" style="-webkit-text-stroke: 1px black;">Lista Studenti
+    </h2>
+    <h3>Elenco degli studenti</h3>
+    <div
+      class="first-array bg-warning bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto shadow"
+      style="max-height:500px">
+      <h4 id="array-student" class=" mb-0"></h4>
     </div>
-    <h3>Dati per la Stamperia</h3>
-    <div class="second-array bg-danger bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto ">
-      <h4 class=" mb-4 small"></h4>
+    <h3>Targe Nomi Studenti</h3>
+    <div
+      class="second-array bg-danger bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto shadow"
+      style="max-height:500px">
+      <h4 id="array-student-name" class="mb-0"></h4>
+    </div>
+    <h3>Studenti con voti superiori a 70</h3>
+    <div
+      class="second-array bg-danger bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto shadow"
+      style="max-height:500px">
+      <h4 id="array-student-grades" class="mb-0"></h4>
+    </div>
+    <h3>Studenti con voti superiori a 70 e id superiore a 120</h3>
+    <div
+      class="second-array bg-danger bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto shadow"
+      style="max-height:500px">
+      <h4 id="array-student-grades-and-id" class="mb-0"></h4>
     </div>
     <div id="array-creation">
       <div class="buttons d-flex gap-5 justify-content-center ">
-        <button id="generate-guest-info" type="button" class="btn btn-lg  btn-success align-self-center ">Genera il
-          formato dati per la stamperia</button>
-        <button id="cancel-button" type="button" class="btn btn-lg btn-danger align-self-center ">Cancella</button>
+        <button id="generate-sudent-list" type="button"
+          class="btn btn-lg  btn-success align-self-center border border-dark shadow">Ricerca
+          Studenti</button>
+        <button id="cancel-button-2" type="button"
+          class="btn btn-lg btn-danger align-self-center border border-dark shadow">Cancella</button>
       </div>
     </div>
   </div>
 
-  <div class="container my-5 d-flex flex-column p-4 bg-light border border-5 border-warning-subtle  rounded-3  ">
-    <h2 class="text-center mb-3 ">Snack 2 - Elenco Studenti</h2>
-    <h3>Elenco degli studenti</h3>
-    <div class="first-array bg-warning bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto ">
-      <h4 id="array-student" class=" mb-4 small"></h4>
+  <div class="container my-5 d-flex flex-column p-4 bg-light border border-5 border-warning-subtle rounded-3">
+    <h2 class="text-center mb-3 display-4 fw-bold text-secondary" style="-webkit-text-stroke: 1px black;">Bici da Corsa
+    </h2>
+    <h3>Elenco delle biciclette</h3>
+    <div
+      class="first-array bg-warning bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto shadow"
+      style="max-height:500px">
+      <h4 id="array-student" class=" mb-0"></h4>
     </div>
-    <h3>Targe Nomi Studenti</h3>
-    <div class="second-array bg-danger bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto ">
-      <h4 id="array-student-name" class=" mb-4 small"></h4>
+    <h3>Biciletta con peso minore</h3>
+    <div
+      class="second-array bg-danger bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto shadow"
+      style="max-height:500px">
+      <h4 id="array-student-name" class="mb-0"></h4>
     </div>
-    <h3>Studenti con voti superiori a 70</h3>
-    <div class="second-array bg-danger bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto ">
-      <h4 id="array-student-grades" class=" mb-4 small"></h4>
-    </div>
-    <h3>Studenti con voti superiori a 70 e id superiore a 120</h3>
-    <div class="second-array bg-danger bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto ">
-      <h4 id="array-student-grades-and-id" class=" mb-4 small"></h4>
+    <h3>Bicicletta con peso maggiore</h3>
+    <div
+      class="second-array bg-danger bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto shadow"
+      style="max-height:500px">
+      <h4 id="array-student-grades" class="mb-0"></h4>
     </div>
     <div id="array-creation">
       <div class="buttons d-flex gap-5 justify-content-center ">
-        <button id="generate-sudent-list" type="button" class="btn btn-lg  btn-success align-self-center ">Ricerca
+        <button id="generate-sudent-list" type="button"
+          class="btn btn-lg  btn-success align-self-center border border-dark shadow">Ricerca
           Studenti</button>
-        <button id="cancel-button-2" type="button" class="btn btn-lg btn-danger align-self-center ">Cancella</button>
+        <button id="cancel-button-2" type="button"
+          class="btn btn-lg btn-danger align-self-center border border-dark shadow">Cancella</button>
       </div>
     </div>
   </div>
