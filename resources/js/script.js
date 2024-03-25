@@ -9,7 +9,7 @@ function start() {
 
     const UserBar = document.createElement('div');
     UserBar.className = "container d-flex justify-content-between align-items-center align-content-center bg-light-subtle mb-5 mt-2 py-4 border border-5 border-warning-subtle rounded-3";
-    UserBar.append(createButton("jsnack-1", "Festa D.Johnson", snack1), createButton("jsnack-2", "Lista Studenti", snack2), createButton("jsnack-3", "Bici da Corsa", snack3))
+    UserBar.append(createButton("jsnack-1", "Festa D.Johnson", snack1), createButton("jsnack-2", "Lista Studenti", snack2), createButton("jsnack-3", "Bici da Corsa", snack3), createButton("jsnack-4", "Campionato", snack4))
     function createButton(classButton, content, functionOnClick) {
         const Button = document.createElement('button');
         Button.id = `${classButton}`
@@ -335,3 +335,110 @@ function snack3() {
 
 }
 
+
+
+/* JSNACK 3 - BICICLETTE
+TODO Creare un array di oggetti di squadre di calcio. Ogni squadra avrà diverse proprietà: nome, punti fatti, falli subiti.
+TODO Nome sarà l’unica proprietà da compilare, le altre saranno tutte settate a 0.
+TODO Generare numeri random al posto degli 0 nelle proprietà: punti fatti e falli subiti.
+TODO Infine usando la destrutturazione creiamo un nuovo array i cui elementi contengono solo nomi e falli subiti e stampiamo tutto in console
+*/
+function snack4() {
+    reset()
+    const snack = document.createElement('div');
+    snack.id = "jsnack"
+    snack.className = 'container my-5 d-flex flex-column p-4 bg-light border border-5 border-warning-subtle rounded-3';
+    tmpl = `
+    <h2 class="text-center mb-3 display-4 fw-bold text-secondary" style="-webkit-text-stroke: 1px black;">Campionato
+    </h2>
+    <h3>Elenco delle Squadre</h3>
+    <div
+      class="first-array bg-warning bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto shadow"
+      style="max-height:700px">
+      <h4 id="teams" class=" mb-0"></h4>
+    </div>
+    <h3>Falli Subiti</h3>
+    <div
+      class="second-array bg-danger bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto shadow"
+      style="max-height:500px">
+      <h4 id="teams-fail" class="mb-0"></h4>
+    </div>
+    <h3>Goal Fatti</h3>
+    <div
+      class="second-array bg-danger bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto shadow"
+      style="max-height:500px">
+      <h4 id="teams-goal" class="mb-0"></h4>
+    </div>
+    <div id="array-creation">
+      <div class="buttons d-flex gap-5 justify-content-center ">
+        <button id="start-championship" type="button"
+          class="btn btn-lg  btn-success align-self-center border border-dark shadow">Inizia Campionato</button>
+        <button id="cancel-button-2" type="button"
+          class="btn btn-lg btn-primary align-self-center border border-dark shadow">Gioca un nuovo Campionato</button>
+      </div>
+    </div>
+    `;
+    snack.innerHTML = tmpl;
+    App.append(snack);
+    //input 
+    //buttons
+    const StartChampionship = document.getElementById("start-championship");
+    const CancelButton2 = document.getElementById("cancel-button-2");
+    //output
+    const TeamsRecap = document.getElementById("teams");
+    const TeamsFail = document.getElementById("teams-fail");
+    const TeamsGoal = document.getElementById("teams-goal");
+    //variables
+    const Teams = [
+        { "nome": "Juventus", "puntiFatti": 0, "falliSubiti": 0 },
+        { "nome": "Inter", "puntiFatti": 0, "falliSubiti": 0 },
+        { "nome": "Milan", "puntiFatti": 0, "falliSubiti": 0 },
+        { "nome": "Napoli", "puntiFatti": 0, "falliSubiti": 0 },
+        { "nome": "Roma", "puntiFatti": 0, "falliSubiti": 0 },
+        { "nome": "Lazio", "puntiFatti": 0, "falliSubiti": 0 },
+        { "nome": "Atalanta", "puntiFatti": 0, "falliSubiti": 0 },
+        { "nome": "Fiorentina", "puntiFatti": 0, "falliSubiti": 0 },
+        { "nome": "Sassuolo", "puntiFatti": 0, "falliSubiti": 0 },
+        { "nome": "Torino", "puntiFatti": 0, "falliSubiti": 0 }
+    ]
+
+    let teamsCopy = [...Teams]
+    TeamsRecap.append(createTable(teamsCopy));
+
+
+    function createTable(array) {
+        const table = document.createElement('table');
+        table.className = "table table-striped table-warning border border-black rounded-3";
+        const THead = document.createElement('thead');
+        THead.innerHTML += `
+            <tr>
+                <th scope="col" class="text-center">Position</th>
+                <th scope="col">Nome</th>
+                <th scope="col" class="text-center">Punti Fatti</th>
+                <th scope="col" class="text-center">Falli Subiti</th>
+            </tr>
+        `;
+        const TBody = document.createElement('tbody');
+        array.forEach((element, index) => {
+            const { nome, puntiFatti, falliSubiti } = element;
+            TBody.innerHTML += `
+            <tr>
+                <th scope="row" class="text-center">${index + 1}</th>
+                <td >${nome}</td>
+                <td class="text-center">${puntiFatti}</td>
+                <td class="text-center">${falliSubiti}</td>
+            </tr>
+            `
+        });
+        table.append(THead, TBody);
+        return table
+    }
+
+    StartChampionship.addEventListener('click', () => {
+
+    })
+
+    CancelButton2.addEventListener('click', () => {
+    })
+
+}
