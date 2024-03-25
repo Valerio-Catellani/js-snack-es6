@@ -354,8 +354,12 @@ function snack4() {
     <h3>Elenco delle Squadre</h3>
     <div
       class="first-array bg-warning bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto shadow"
-      style="max-height:700px">
+      style="max-height:500px">
       <h4 id="teams" class=" mb-0"></h4>
+    </div>
+    <div class="buttons d-flex gap-5 justify-content-center mb-3">
+      <button id="start-championship" type="button"
+        class="btn btn-lg  btn-success align-self-center border border-dark shadow">Inizia Campionato</button>
     </div>
     <h3>Falli Subiti</h3>
     <div
@@ -363,27 +367,12 @@ function snack4() {
       style="max-height:500px">
       <h4 id="teams-fail" class="mb-0"></h4>
     </div>
-    <h3>Goal Fatti</h3>
-    <div
-      class="second-array bg-danger bg-opacity-75 p-4 border border-dark border-2 rounded-2 mb-4 overflow-y-auto shadow"
-      style="max-height:500px">
-      <h4 id="teams-goal" class="mb-0"></h4>
-    </div>
-    <div id="array-creation">
-      <div class="buttons d-flex gap-5 justify-content-center ">
-        <button id="start-championship" type="button"
-          class="btn btn-lg  btn-success align-self-center border border-dark shadow">Inizia Campionato</button>
-        <button id="cancel-button-2" type="button"
-          class="btn btn-lg btn-primary align-self-center border border-dark shadow">Gioca un nuovo Campionato</button>
-      </div>
-    </div>
     `;
     snack.innerHTML = tmpl;
     App.append(snack);
     //input 
     //buttons
     const StartChampionship = document.getElementById("start-championship");
-    const CancelButton2 = document.getElementById("cancel-button-2");
     //output
     const TeamsRecap = document.getElementById("teams");
     const TeamsFail = document.getElementById("teams-fail");
@@ -406,27 +395,28 @@ function snack4() {
     TeamsRecap.append(createTable(teamsCopy));
 
 
-    function createTable(array) {
+    function createTable(array, color) {
+        let { nome, puntiFatti = "", falliSubiti = "" } = array[0];
         const table = document.createElement('table');
-        table.className = "table table-striped table-warning border border-black rounded-3";
+        table.className = `table table-striped table-${color} border border-black rounded-3`;
         const THead = document.createElement('thead');
         THead.innerHTML += `
             <tr>
                 <th scope="col" class="text-center">Position</th>
                 <th scope="col">Nome</th>
-                <th scope="col" class="text-center">Punti Fatti</th>
-                <th scope="col" class="text-center">Falli Subiti</th>
+                ${puntiFatti !== "" ? `<th scope="col" class="text-center">Punti Fatti</th>` : ""} 
+                ${falliSubiti !== "" ? `<th scope="col" class="text-center">Falli Subiti</th>` : ""} 
             </tr>
         `;
         const TBody = document.createElement('tbody');
         array.forEach((element, index) => {
-            const { nome, puntiFatti, falliSubiti } = element;
+            const { nome, puntiFatti = "", falliSubiti = "" } = element;
             TBody.innerHTML += `
             <tr>
                 <th scope="row" class="text-center">${index + 1}</th>
                 <td >${nome}</td>
-                <td class="text-center">${puntiFatti}</td>
-                <td class="text-center">${falliSubiti}</td>
+                ${puntiFatti !== "" ? `<td scope="col" class="text-center">${puntiFatti}</td>` : ""} 
+                ${falliSubiti !== "" ? `<td scope="col" class="text-center">${falliSubiti}</td>` : ""} 
             </tr>
             `
         });
@@ -435,10 +425,22 @@ function snack4() {
     }
 
     StartChampionship.addEventListener('click', () => {
-
+        StartChampionship.innerHTML = "Gioca un nuovo campionato"
+        teamsCopy.forEach(element => {
+            element.puntiFatti = getRndInteger(0, 30)
+            element.falliSubiti = getRndInteger(0, 40);
+        })
+        teamsCopy.sort((a, b) => {
+            return b.puntiFatti - a.puntiFatti
+        })
+        document.querySelector('#teams table').remove();
+        TeamsRecap.append(createTable(teamsCopy, "warning"));
+        let teamsFail = [...teamsCopy];
+        teamsFail.map(element => delete element.puntiFatti);
+        teamsFail.sort((a, b) => {
+            return b.falliSubiti - a.falliSubiti
+        })
+        document.querySelector('#teams-fail table') ? document.querySelector('#teams-fail table').remove() : "";
+        TeamsFail.append(createTable(teamsFail, "danger"));
     })
-
-    CancelButton2.addEventListener('click', () => {
-    })
-
 }
